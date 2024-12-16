@@ -1,0 +1,14 @@
+[package]
+name = "icp_transaction_listener"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ic-agent = "0.39"
+candid = "0.10"
+reqwest = { version = "0.11", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_cbor = "0.11"
+tokio = { version = "1", features = ["full"] }
+crc = "2.1" # Library for CRC32 checksum calculation
+hex = "0.4" # Library for hexadecimal encoding and decoding
