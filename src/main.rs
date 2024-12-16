@@ -2,6 +2,7 @@ use candid::{types::result, CandidType, Decode, Encode};
 use ic_agent::{export::Principal, Agent};
 use serde::Deserialize;
 use std::{env, error::Error, os::unix::thread, vec};
+use tokio::time::{sleep, Duration};
 
 use crc::{Crc, CRC_32_ISO_HDLC};
 use hex;
@@ -81,7 +82,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     }
 
     let address = &args[1];
-
+    // 轮询间隔10秒
+    let sleep_duration = Duration::from_secs(3);
     match validate_icp_address(address) {
         Ok(_) => {}
         Err(e) => {
@@ -140,6 +142,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 }
             }
         }
+
+        sleep(sleep_duration).await;
     }
 
     Ok(())
